@@ -8,11 +8,11 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="bg-gray-900">
+    <div className="bg-gray-900 h-screen w-screen">
       <main className="relative isolate">
         {/* Background */}
         <div
-          className="absolute inset-x-0 top-4 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl"
+          className="absolute inset-x-0 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl "
           aria-hidden="true"
         >
           <div
