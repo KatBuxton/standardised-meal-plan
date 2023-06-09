@@ -1,16 +1,37 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {MealDataContext} from "../../MealDataContext";
 
+function getCurrentSeason() {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // Months are zero-based
+
+    if (currentMonth >= 3 && currentMonth <= 5) {
+        return "spring";
+    } else if (currentMonth >= 6 && currentMonth <= 8) {
+        return "summer";
+    } else if (currentMonth >= 9 && currentMonth <= 11) {
+        return "autumn";
+    } else {
+        return "winter";
+    }
+}
+
 export default function Card() {
     const {mealData} = useContext(MealDataContext);
-    console.log(mealData);
+    const [season, setSeason] = useState(getCurrentSeason())
+    const filteredMeals = mealData.filter((meal) => meal.season === season);
+
+    useEffect(() => {
+        const currentSeason = getCurrentSeason();
+        setSeason(currentSeason);
+    }, []);
 
     return (
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-            <h2 className="text-2xl font-bold tracking-tight text-gray-100 text-center">Spring</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-gray-100 text-center">{season}</h2>
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                {mealData.map((meal) => (
+                {filteredMeals.map((meal) => (
                     <div key={meal.id} className="group relative">
                         <div className="mb-2 flex flex-col text-center">
                         <p className="text-sm text-gray-500">{meal.weekday}</p>
