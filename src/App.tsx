@@ -7,11 +7,24 @@ import { MealData, MealDataContext } from "./MealDataContext";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 async function fetchMealData() {
-    const response = await fetch(
-        "https://katbuxton.github.io/standardised-meal-plan-data/data.json"
-    );
-    const data = await response.json();
-    return data;
+    const [dataResponse, ingredientsResponse, recipesResponse] = await Promise.all([
+        fetch("https://katbuxton.github.io/standardised-meal-plan-data/data.json"),
+        fetch("https://katbuxton.github.io/standardised-meal-plan-data/ingredients.json"),
+        fetch("https://katbuxton.github.io/standardised-meal-plan-data/recipes.json"),
+    ]);
+    const [data, ingredients, recipes] = await Promise.all([
+        dataResponse.json(),
+        ingredientsResponse.json(),
+        recipesResponse.json(),
+    ]);
+
+    const combinedData = data.map((meal) => ({
+        ...meal,
+        ingredients: ingredients.find((ingredient) => ingredient.id === meal.id),
+        recipe: recipes.find((recipe) => recipe.id === meal.id),
+    }));
+
+    return combinedData;
 }
 
 function App() {

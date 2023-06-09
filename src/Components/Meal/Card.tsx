@@ -32,14 +32,13 @@ export default function Card() {
             <h2 className="text-2xl font-bold tracking-tight text-gray-100 text-center">{season}</h2>
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 {filteredMeals.map((meal) => (
+                    <Link to={`/${meal.id}`}>
                     <div key={meal.id} className="group relative">
                         <div className="mb-2 flex flex-col text-center">
                         <p className="text-sm text-gray-500">{meal.weekday}</p>
                            <h3 className="text-sm text-gray-200">
-                                    <Link to={`/${meal.id}`}>
                                         <span aria-hidden="true" className="absolute inset-0"/>
                                         {meal.title}
-                                    </Link>
                            </h3>
                         </div>
                         <div
@@ -51,8 +50,8 @@ export default function Card() {
   lg:h-full lg:w-full"
                             />
                         </div>
-
                     </div>
+                    </Link>
                 ))}
             </div>
         </div>
