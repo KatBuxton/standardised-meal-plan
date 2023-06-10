@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {MealDataContext} from "../MealDataContext";
 
 export const RecipeDetail = () => {
@@ -14,14 +14,18 @@ export const RecipeDetail = () => {
     console.log(mealData)
 
     return (
+        <>
         <div
-            className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+            className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-4 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+                <Link className=" text-sm text-gray-200 hover:text-sky-500" to="/" >
+                    Back to all meals
+                </Link>
             {mealData
                 .filter((mealItem) => mealItem.id === mealId)
                 .map((meal) => (
                     <>
                         <div className="lg:max-w-lg lg:self-end">
-                            <div key={meal.id} className="mt-4">
+                            <div key={meal.id}>
                                 <h1 className="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">{meal.title}</h1>
                                 <section aria-labelledby="information-heading" className="mt-4">
                                     <h2 id="information-heading" className="sr-only">
@@ -61,5 +65,6 @@ export const RecipeDetail = () => {
                     </>
                 ))}
         </div>
+        </>
     );
 };
