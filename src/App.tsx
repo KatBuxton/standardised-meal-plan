@@ -3,13 +3,13 @@ import Card from "./Components/Meal/Card";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecipeDetail } from "./Components/RecipeDetail";
 import { PageLayout } from "./Components/PageLayout";
-import { MealData, MealDataContext } from "./MealDataContext";
+import {Ingredient, Recipe, MealData, MealDataContext} from "./MealDataContext";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import Menu from "./Components/Menu";
 import React, {useEffect, useState} from "react";
 import ShoppingList from "./Components/ShoppingList";
 
-async function fetchMealData() {
+async function fetchMealData(): Promise<MealData[]> {
     const [dataResponse, ingredientsResponse, recipesResponse] = await Promise.all([
         fetch("https://katbuxton.github.io/standardised-meal-plan-data/data.json"),
         fetch("https://katbuxton.github.io/standardised-meal-plan-data/ingredients.json"),
@@ -21,16 +21,16 @@ async function fetchMealData() {
         recipesResponse.json(),
     ]);
 
-    const combinedData = data.map((meal) => ({
+    const combinedData = data.map((meal: MealData) => ({
         ...meal,
-        ingredients: ingredients.find((ingredient) => ingredient.id === meal.id),
-        recipe: recipes.find((recipe) => recipe.id === meal.id),
+        ingredients: ingredients.find((ingredient: Ingredient) => ingredient.id === meal.id),
+        recipe: recipes.find((recipe: Recipe) => recipe.id === meal.id),
     }));
 
     return combinedData;
 }
 
-function getCurrentSeason() {
+function getCurrentSeason(): string {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1; // Months are zero-based
 
@@ -45,7 +45,7 @@ function getCurrentSeason() {
     }
 }
 function App() {
-    const [season, setSeason] = useState(getCurrentSeason())
+    const [season, setSeason] = useState<string>(getCurrentSeason())
     const { isLoading, data: mealData } = useQuery<MealData[]>(
         "mealData",
         fetchMealData
@@ -62,7 +62,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <MealDataContext.Provider value={{ mealData }}>
+            <MealDataContext.Provider value={{mealData}}>
                 <PageLayout>
                     <Menu setSeason={setSeason}/>
                     <Routes>

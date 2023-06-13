@@ -4,7 +4,7 @@ import {MealDataContext} from "../MealDataContext";
 
 export const RecipeDetail = () => {
     const {mealData} = useContext(MealDataContext);
-    const {mealId} = useParams();
+    const {mealId} = useParams<{ mealId: string }>();
     const selectedMeal = parseInt(mealId!);
 
     if (!mealData) {
@@ -21,7 +21,7 @@ export const RecipeDetail = () => {
                     Back to all meals
                 </Link>
             {mealData
-                .filter((mealItem) => mealItem.id === mealId)
+                .filter((mealItem) => mealItem.id === selectedMeal)
                 .map((meal) => (
                     <>
                         <div className="lg:max-w-lg lg:self-end">

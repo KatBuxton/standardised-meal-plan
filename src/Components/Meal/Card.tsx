@@ -1,9 +1,13 @@
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
-import {MealDataContext} from "../../MealDataContext";
+import {MealData, MealDataContext} from "../../MealDataContext";
 
-export default function Card({season}) {
-    const {mealData} = useContext(MealDataContext);
+export interface CardProps {
+    season: string;
+}
+
+export default function Card({season}: CardProps) {
+    const {mealData} = useContext(MealDataContext) as {mealData: MealData[]};
     const filteredMeals = mealData.filter((meal) => meal.season === season);
 
     return (

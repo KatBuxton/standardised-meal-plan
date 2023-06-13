@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import { MealDataContext } from '../MealDataContext';
+import {CardProps} from "./Meal/Card";
+interface ShoppingListProps extends CardProps {}
 
-export default function ShoppingList({season}) {
+export default function ShoppingList({season}: ShoppingListProps) {
     const { mealData } = useContext(MealDataContext);
 
     if (!mealData) {
@@ -23,7 +25,6 @@ export default function ShoppingList({season}) {
         }
     });
     const ingredientsList = Array.from(ingredientsSet);
-
     return (
         <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-4 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         <fieldset>

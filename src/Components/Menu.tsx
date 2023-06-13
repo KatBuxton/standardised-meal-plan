@@ -1,11 +1,28 @@
 import { Popover, Transition } from '@headlessui/react'
 import {Bars3Icon, ShoppingCartIcon, SunIcon, HomeIcon} from "@heroicons/react/24/solid";
-import { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 
-const menuItems = [
-    {name: "Home | All Meals", href:"/", icon: HomeIcon},
-    {name: "Shopping List", href:"/shopping-list", icon: ShoppingCartIcon},
-]
+interface MenuItem {
+    name: string;
+    href: string;
+    icon: React.ComponentType<any>;
+}
+
+interface ChangeSeasonItem {
+    name: string;
+    href: string;
+    icon: React.ComponentType<any>;
+}
+
+interface MenuProps {
+    setSeason: (newSeason: string) => void;
+}
+
+const menuItems: MenuItem[] = [
+    { name: "Home | All Meals", href: "/", icon: HomeIcon },
+    { name: "Shopping List", href: "/shopping-list", icon: ShoppingCartIcon },
+];
+
 
 //todo: add different icon for each season
 const changeSeason = [
@@ -14,10 +31,12 @@ const changeSeason = [
     {name: "summer", href:"#", icon: SunIcon},
     {name: "autumn", href:"#", icon: SunIcon},
 ]
-export default function Menu({setSeason}) {
+export default function Menu({setSeason}: MenuProps) {
+    const [isOpen, setIsOpen] = useState(false);
 
-    const onSeasonChange = (newSeason) => {
+    const onSeasonChange = (newSeason: string) => {
         setSeason(newSeason)
+        setIsOpen(false)
     }
 
     return (
