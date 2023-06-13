@@ -41,7 +41,7 @@ export interface MealData {
     recipe: Recipe;
 }
 interface MealDataContextType {
-    mealData: MealData[];
+    mealData: MealData[] | undefined;
 }
 
 export const MealDataContext = createContext<MealDataContextType>({ mealData:[] });

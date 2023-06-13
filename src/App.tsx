@@ -62,7 +62,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <MealDataContext.Provider value={{mealData}}>
+            <MealDataContext.Provider value={{ mealData }}>
                 <PageLayout>
                     <Menu setSeason={setSeason}/>
                     <Routes>

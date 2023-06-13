@@ -12,19 +12,21 @@ export default function ShoppingList({season}: ShoppingListProps) {
 
     // Gather all unique ingredients from the current season's meals
     const ingredientsSet = new Set<string>();
+
     mealData.forEach((meal) => {
         if (meal.season === season) {
-            Object.keys(meal.ingredients).forEach((key) => {
-                if (key.startsWith('ing')) {
-                    const ingredient = meal.ingredients[key].trim();
-                    if (ingredient !== '') {
-                        ingredientsSet.add(ingredient);
-                    }
+            Object.values(meal.ingredients).forEach((ingredient) => {
+                const trimmedIngredient = String(ingredient).trim();
+                if (trimmedIngredient !== '') {
+                    ingredientsSet.add(trimmedIngredient);
                 }
             });
         }
     });
+
     const ingredientsList = Array.from(ingredientsSet);
+    console.log(ingredientsList)
+
     return (
         <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-4 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         <fieldset>
