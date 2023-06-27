@@ -39,6 +39,10 @@ export default function Menu({setSeason}: MenuProps) {
         setIsOpen(false)
     }
 
+    const handleMenuItemClick = () => {
+        setIsOpen(false);
+    };
+
     return (
         <Popover className="relative isolate z-50 shadow">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-6">
@@ -61,6 +65,7 @@ export default function Menu({setSeason}: MenuProps) {
                                             <Link
                                                 key={item.name}
                                                 to={item.href}
+                                                onClick={handleMenuItemClick}
                                                 className="flex gap-x-4 py-2 text-sm font-semibold leading-6 text-gray-100"
                                             >
                                                 <item.icon className="h-6 w-6 flex-none text-gray-400" aria-hidden="true" />

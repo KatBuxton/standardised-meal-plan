@@ -10,8 +10,6 @@ export const RecipeDetail = () => {
     if (!mealData) {
         return <div>Loading...</div>;
     }
-    console.log(mealId, selectedMeal)
-    console.log(mealData)
 
     return (
         <>

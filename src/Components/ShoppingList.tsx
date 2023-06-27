@@ -15,10 +15,12 @@ export default function ShoppingList({season}: ShoppingListProps) {
 
     mealData.forEach((meal) => {
         if (meal.season === season) {
-            Object.values(meal.ingredients).forEach((ingredient) => {
-                const trimmedIngredient = String(ingredient).trim();
-                if (trimmedIngredient !== '') {
-                    ingredientsSet.add(trimmedIngredient);
+            Object.entries(meal.ingredients).forEach(([key, value]) => {
+                if (key.startsWith("ing") && value !== "") {
+                    const trimmedIngredient = String(value).trim();
+                    if (trimmedIngredient !== '') {
+                        ingredientsSet.add(trimmedIngredient);
+                    }
                 }
             });
         }
