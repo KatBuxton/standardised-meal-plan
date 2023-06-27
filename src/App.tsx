@@ -1,6 +1,6 @@
 import "./App.css";
 import Card from "./Components/Meal/Card";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import { RecipeDetail } from "./Components/RecipeDetail";
 import { PageLayout } from "./Components/PageLayout";
 import {Ingredient, Recipe, MealData, MealDataContext} from "./MealDataContext";

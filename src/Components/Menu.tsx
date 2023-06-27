@@ -1,6 +1,8 @@
 import { Popover, Transition } from '@headlessui/react'
-import {Bars3Icon, ShoppingCartIcon, SunIcon, HomeIcon} from "@heroicons/react/24/solid";
+import {Bars3Icon, ShoppingCartIcon, HomeIcon} from "@heroicons/react/24/solid";
+import {IoMdFlower, IoMdSnow, IoMdSunny, IoMdLeaf} from "react-icons/io";
 import React, { Fragment, useState } from 'react'
+import {Link} from "react-router-dom";
 
 interface MenuItem {
     name: string;
@@ -23,14 +25,12 @@ const menuItems: MenuItem[] = [
     { name: "Shopping List", href: "/shopping-list", icon: ShoppingCartIcon },
 ];
 
-
-//todo: add different icon for each season
 const changeSeason = [
-    {name: "winter", href:"#", icon: SunIcon},
-    {name: "spring", href:"#", icon: SunIcon},
-    {name: "summer", href:"#", icon: SunIcon},
-    {name: "autumn", href:"#", icon: SunIcon},
-]
+    { name: "winter", href: "#", icon: IoMdSnow },
+    { name: "spring", href: "#", icon: IoMdFlower },
+    { name: "summer", href: "#", icon: IoMdSunny },
+    { name: "autumn", href: "#", icon: IoMdLeaf },
+];
 export default function Menu({setSeason}: MenuProps) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -58,14 +58,14 @@ export default function Menu({setSeason}: MenuProps) {
                 <Popover.Panel className="absolute left-0 mt-2 w-screen bg-gray-900 py-2 px-4 shadow-lg ring-1 ring-gray-900/5 h-screen">
                         <div className="grid grid-cols-1 gap-y-6">
                                         {menuItems.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
-                                                href={item.href}
+                                                to={item.href}
                                                 className="flex gap-x-4 py-2 text-sm font-semibold leading-6 text-gray-100"
                                             >
                                                 <item.icon className="h-6 w-6 flex-none text-gray-400" aria-hidden="true" />
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ))}
                             <div>
                                 <h3 className="text-sm font-medium leading-6 text-gray-100">ChangeSeason</h3>
