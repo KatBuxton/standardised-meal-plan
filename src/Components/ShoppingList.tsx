@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { MealDataContext } from '../MealDataContext';
 import {CardProps} from "./Meal/Card";
 interface ShoppingListProps extends CardProps {}
@@ -30,10 +30,13 @@ export default function ShoppingList({season}: ShoppingListProps) {
     console.log(ingredientsList)
 
     return (
-        <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-4 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-        <fieldset>
+        <div className="mx-auto max-w-2xl px-6 py-6 sm:px-6 sm:py-4 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+            <div className="mt-4">
+                <h1 className="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">Shopping list</h1>
+            </div>
+            <fieldset>
             <legend className="sr-only">Shopping List</legend>
-            <div className="space-y-5">
+            <div className="space-y-5 mt-4">
                 {ingredientsList.map((ingredient, index) => (
                     <div key={index} className="relative flex items-start">
                         <div className="flex h-6 items-center">
