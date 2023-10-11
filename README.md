@@ -9,6 +9,7 @@ Typescript, Tailwind CSS
 ## Features
 
 Recipe display, Meal planning, Ingredient shopping list
+![Search by name and address (2)](https://github.com/KatBuxton/standardised-meal-plan/assets/101291722/74f8de78-41d6-45c8-a35f-02f4643af0e9)
 
 ## Installation
 
