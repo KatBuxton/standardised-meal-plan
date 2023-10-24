@@ -29,6 +29,8 @@ export interface Recipe {
     "step 4": string;
     "step 5": string;
     "step 6": string;
+    "step 7": string;
+
 }
 
 export interface MealData {

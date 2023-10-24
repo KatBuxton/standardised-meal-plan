@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
 import {MealData, MealDataContext} from "../../MealDataContext";
+import {ImageComponent} from "../ImageComponent";
 
 export interface CardProps {
     season: string;
@@ -26,12 +27,14 @@ export default function Card({season}: CardProps) {
                         </div>
                         <div
                             className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 h-80">
-                            <img
-                                src={meal.image}
-                                alt={meal.title}
-                                className="h-full w-full object-cover object-bottom
-  lg:h-full lg:w-full"
-                            />
+  {/*                          <img*/}
+  {/*                              src={meal.image}*/}
+  {/*                              alt={meal.title}*/}
+  {/*                              loading="lazy"*/}
+  {/*                              className="h-full w-full object-cover object-bottom*/}
+  {/*lg:h-full lg:w-full"*/}
+  {/*                          />*/}
+                            <ImageComponent imageUrl={meal.image} />
                         </div>
                     </div>
                     </Link>

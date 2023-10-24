@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {MealDataContext} from "../MealDataContext";
+import {ImageComponent} from "./ImageComponent";
 
 export const RecipeDetail = () => {
     const {mealData} = useContext(MealDataContext);
@@ -61,8 +62,9 @@ export const RecipeDetail = () => {
                         </div>
                         <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
                             <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
-                                <img src={meal.image} alt={meal.title}
-                                     className="h-full w-full object-cover object-center"/>
+                                <ImageComponent imageUrl={meal.image} />
+                                {/*<img src={meal.image} alt={meal.title}*/}
+                                {/*     className="h-full w-full object-cover object-center"/>*/}
                             </div>
                         </div>
                     </div>
