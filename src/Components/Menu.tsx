@@ -25,7 +25,7 @@ const menuItems: MenuItem[] = [
     { name: "Shopping List", href: "/shopping-list", icon: ShoppingCartIcon },
 ];
 
-const changeSeason = [
+const changeSeason: ChangeSeasonItem[] = [
     { name: "winter", href: "/", icon: IoMdSnow },
     { name: "spring", href: "/", icon: IoMdFlower },
     { name: "summer", href: "/", icon: IoMdSunny },
@@ -53,13 +53,13 @@ export default function Menu({setSeason}: MenuProps) {
                 leaveFrom="translate-x-0 opacity-100"
                 leaveTo="-translate-x-full opacity-0"
             >
-                <DropdownMenu.Items className="absolute left-0 mt-2 w-screen bg-gray-900 py-2 px-6 shadow-lg ring-1 z-50 ring-gray-900/5 h-screen">
-                    <div className="grid grid-cols-1 gap-y-6">
+                <DropdownMenu.Items className="absolute flex mt-2 w-screen bg-gray-900 py-2 px-6 shadow-lg ring-1 z-50 ring-gray-900/5 h-screen">
+                    <div className="flex flex-col mx-auto gap-y-6">
                         {menuItems.map((item) => (
                             <DropdownMenu.Item key={item.name}>
                                 <Link
                                     to={item.href}
-                                    className="flex gap-x-4 py-2 text-sm font-semibold leading-6 text-gray-100"
+                                    className="flex gap-x-4 py-2 text-l font-semibold leading-6 text-gray-100"
                                 >
                                     <item.icon className="h-6 w-6 flex-none text-gray-400" aria-hidden="true" />
                                     {item.name}
@@ -67,7 +67,7 @@ export default function Menu({setSeason}: MenuProps) {
                             </DropdownMenu.Item>
                         ))}
                         <div>
-                            <h3 className="text-sm font-medium leading-6 text-gray-100 mt-2">ChangeSeason</h3>
+                            <h3 className="text-l font-medium leading-6 text-gray-100 mt-2">Change Season:</h3>
                             <div className="mt-6 flow-root">
                                 <div className="-my-2">
                                     {changeSeason.map((item) => (
@@ -75,7 +75,7 @@ export default function Menu({setSeason}: MenuProps) {
                                         <Link
                                             to={item.href}
                                             onClick={() => onSeasonChange(item.name)}
-                                            className="flex gap-x-4 py-2 text-sm font-semibold leading-6 text-gray-100"
+                                            className="flex gap-x-4 py-2 text-l font-semibold leading-6 text-gray-100"
                                         >
                                             <item.icon className="h-6 w-6 flex-none text-gray-400" aria-hidden="true" />
                                             {item.name}
