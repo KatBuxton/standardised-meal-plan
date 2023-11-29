@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {MealDataContext} from "../MealDataContext";
 import {ImageComponent} from "./ImageComponent";
@@ -7,6 +7,10 @@ export const RecipeDetail = () => {
     const {mealData} = useContext(MealDataContext);
     const {mealId} = useParams<{ mealId: string }>();
     const selectedMeal = parseInt(mealId!);
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+    },[]);
 
     if (!mealData) {
         return <div>Loading...</div>;
@@ -19,9 +23,7 @@ export const RecipeDetail = () => {
                 .map((meal) => (
         <div key={meal.id}
              className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-4 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-
                         <div className="lg:max-w-lg lg:self-end">
-
                             <Link className=" text-sm text-gray-200 hover:text-sky-500" to="/" >
                                 Back to all meals
                             </Link>

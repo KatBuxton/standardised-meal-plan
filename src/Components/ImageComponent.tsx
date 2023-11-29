@@ -1,10 +1,9 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import {Spinner} from "./Spinner";
 
 interface ImageComponentProps {
     imageUrl: string;
 }
-
-// Function to resize an image
 
 const resizeImage = (imagePath: string, width: number, height: number): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -24,11 +23,12 @@ const resizeImage = (imagePath: string, width: number, height: number): Promise<
 };
 
 export const ImageComponent: React.FC<ImageComponentProps> = ({ imageUrl }) => {
-    const [containerSize, setContainerSize] = useState({ width: 500, height: 500 }); // Initial dimensions
+    const [containerSize, setContainerSize] = useState({ width: 500, height: 500 });
     const [resizedImage, setResizedImage] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const imageRef = useRef<HTMLImageElement | null>(null);
 
-    // Handle resizing the container based on its actual size
     const handleResize = () => {
         if (containerRef.current) {
             setContainerSize({
@@ -39,34 +39,46 @@ export const ImageComponent: React.FC<ImageComponentProps> = ({ imageUrl }) => {
     };
 
     useEffect(() => {
-        // Add a resize event listener to the window
         window.addEventListener('resize', handleResize);
-        // Initialize the container size
         handleResize();
 
         return () => {
-            // Clean up the event listener when the component unmounts
             window.removeEventListener('resize', handleResize);
         };
     }, []);
 
     useEffect(() => {
-        // Call the resizeImage function with the image URL and dynamic container dimensions
+        setIsLoading(true);
         resizeImage(imageUrl, containerSize.width, containerSize.height)
             .then((dataUrl) => {
                 setResizedImage(dataUrl);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.error('Image resizing error:', error);
+                setIsLoading(false);
             });
     }, [imageUrl, containerSize]);
 
+    const handleImageLoad = () => {
+        setIsLoading(false);
+    };
+
     return (
-        <img
-            src={resizedImage || imageUrl} // Display the resized image if available
-            alt="Resized Image"
-            loading="lazy"
-            className="h-full w-full object-cover object-center"
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            {isLoading && (
+                <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gray-900">
+                    <Spinner />
+                </div>
+            )}
+            <img
+                ref={imageRef}
+                src={resizedImage || imageUrl}
+                alt="Resized Image"
+                loading="lazy"
+                className="h-full w-full object-cover object-center"
+                onLoad={handleImageLoad}
+            />
+        </div>
     );
-}
+};
